@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cerrno>
 #include <cstdlib>
+#include "primes.h"
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
@@ -20,6 +21,8 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Given integer is too large." << std::endl;
 		return 4;
 	}
+
+	std::cout << std::boolalpha << Math::isPrime(number) << std::endl;
 
 	return 0;
 }

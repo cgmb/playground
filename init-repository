@@ -1,7 +1,16 @@
-#!/bin/sh -e
-git submodule init
-git submodule update
+#!/bin/sh
 
-cd waf
-./waf-light configure build
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
+pathadd $SCRIPT_DIR/waf
+
+WS_BASE=$SCRIPT_DIR
+export WS_BASE
+
+(cd $WS_BASE && tools/setup.sh)

@@ -1,0 +1,12 @@
+To build:
+. init-repository
+waf configure build install
+
+To use isprime:
+./isprime <number>
+
+e.g.
+$ ./isprime 13
+true
+$ ./isprime 21
+false

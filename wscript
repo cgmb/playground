@@ -9,12 +9,31 @@ APPNAME='isprime'
 top = '.'
 out = '.build'
 
+def check_version(minimum, version):
+	assert len(minimum) == 3
+	return (
+		version[0] > minimum[0] or
+		version[0] == minimum[0] and version[1] > minimum[1] or
+		version[0] == minimum[0] and version[1] == minimum[1] and version[2] >= minimum[2]
+		)
+
 def options(opt):
 	opt.load('compiler_cxx')
 
 def configure(conf):
-	conf.env.CXXFLAGS = ['-std=c++11', '-Og', '-Wall']
 	conf.load('compiler_cxx')
+
+	conf.env.CXXFLAGS = ['-Wall']
+	if conf.env.CXX_NAME == 'gcc':
+		if check_version('470', conf.env.CC_VERSION):
+			conf.env.CXXFLAGS.append('-std=c++11')
+		else: 
+			conf.env.CXXFLAGS.append('-std=c++0x')
+		 
+		if check_version('480', conf.env.CC_VERSION):
+			conf.env.CXXFLAGS.append('-Og')
+		else:
+			conf.env.CXXFLAGS.append('-O2')
 
 def build(bld):
 	bld.stlib(

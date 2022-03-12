@@ -1,12 +1,17 @@
 To build:
-. init-repository
-waf configure build install
+
+  . init-repository
+  waf configure build install
 
 To use isprime:
-./isprime <number>
+
+  ./isprime <number>
 
 e.g.
-$ ./isprime 13
-true
-$ ./isprime 21
-false
+
+   $ ./isprime 13
+   true
+   $ ./isprime 21
+   false
+
+Note that your number must be less than `LONG_MAX`.

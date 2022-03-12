@@ -10,3 +10,4 @@ $ ./isprime 13
 true
 $ ./isprime 21
 false
+
